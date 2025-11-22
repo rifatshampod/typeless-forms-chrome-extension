@@ -1,4 +1,5 @@
-# Custom Form Auto-Filler - Chrome Extension
+![Typeless Forms](/screenshots/header.png "Typeless Forms")
+# Typeless Forms : Custom Form Auto-Filler - Chrome Extension
 
 A powerful Chrome extension that allows you to save custom label/value pairs and automatically fill forms on any web page. Built with Vanilla JavaScript and Chrome Manifest V3.
 
@@ -52,6 +53,7 @@ typeless-forms-chrome-extension/
 ## 📖 How to Use
 
 ### Adding Form Data
+![Typeless Forms Add Data](/screenshots/add_data.jpg "Typeless Forms")
 
 1. **Click the extension icon** in your Chrome toolbar
 2. **Enter a Label** (e.g., "email", "phone", "first name")
@@ -62,7 +64,7 @@ typeless-forms-chrome-extension/
 **Tip**: Use descriptive labels that match common form field names for better matching!
 
 ### Filling Forms
-
+![Typeless Forms fill Data](/screenshots/fill_data.jpg "Typeless Forms")
 #### Method 1: Manual Button
 1. Navigate to any web page with a form
 2. Click the extension icon
