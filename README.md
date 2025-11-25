@@ -3,7 +3,11 @@
 
 A powerful Chrome extension that allows you to save custom label/value pairs and automatically fill forms on any web page. Built with Vanilla JavaScript and Chrome Manifest V3.
 
-[Chrome Web Store Link: Add To Chrome](https://chromewebstore.google.com/detail/typeless-form-auto-filler/dcmojhifgeaddhpliklgfdfdedmflgmj)
+<div align="center">
+  
+[![Chrome Web Store](https://img.shields.io/badge/Chrome%20Web%20Store-Add%20to%20Chrome-4285F4?logo=google-chrome&logoColor=white&style=for-the-badge)](https://chromewebstore.google.com/detail/typeless-form-auto-filler/dcmojhifgeaddhpliklgfdfdedmflgmj)
+
+</div>
 
 ## ✨ Features
 
