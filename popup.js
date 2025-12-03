@@ -250,6 +250,15 @@ function renderPairsList() {
     .map(pair => createPairItemHTML(pair))
     .join('');
   
+  // Attach copy event listeners
+  const copyButtons = pairsList.querySelectorAll('.copy-btn');
+  copyButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const value = e.target.dataset.value;
+      handleCopyValue(value, e.target);
+    });
+  });
+  
   // Attach delete event listeners
   const deleteButtons = pairsList.querySelectorAll('.delete-btn');
   deleteButtons.forEach(btn => {
@@ -272,7 +281,10 @@ function createPairItemHTML(pair) {
         <div class="pair-label">${escapeHtml(pair.label)}</div>
         <div class="pair-value">${escapeHtml(pair.value)}</div>
       </div>
-      <button class="delete-btn" data-id="${pair.id}" title="Delete">×</button>
+      <div class="pair-actions">
+        <button class="copy-btn" data-value="${escapeHtml(pair.value)}" title="Copy value to clipboard">📋</button>
+        <button class="delete-btn" data-id="${pair.id}" title="Delete">×</button>
+      </div>
     </div>
   `;
 }

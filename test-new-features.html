@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test New Features - Typeless Forms Extension</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 12px;
+      padding: 40px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    }
+    
+    h1 {
+      color: #667eea;
+      margin-bottom: 10px;
+    }
+    
+    .subtitle {
+      color: #666;
+      margin-bottom: 30px;
+    }
+    
+    .feature-section {
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 24px;
+      border-left: 4px solid #667eea;
+    }
+    
+    h2 {
+      color: #333;
+      margin-bottom: 16px;
+      font-size: 20px;
+    }
+    
+    .test-steps {
+      list-style: none;
+      counter-reset: step-counter;
+    }
+    
+    .test-steps li {
+      position: relative;
+      padding-left: 40px;
+      margin-bottom: 12px;
+      counter-increment: step-counter;
+    }
+    
+    .test-steps li::before {
+      content: counter(step-counter);
+      position: absolute;
+      left: 0;
+      top: 0;
+      background: #667eea;
+      color: white;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    
+    .test-area {
+      background: white;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 20px;
+      margin-top: 16px;
+    }
+    
+    .form-group {
+      margin-bottom: 16px;
+    }
+    
+    label {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 6px;
+      color: #555;
+    }
+    
+    input, textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 14px;
+      font-family: inherit;
+    }
+    
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+    
+    textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+    
+    .paste-here {
+      background: #fff3cd;
+      border: 2px dashed #ffc107;
+      padding: 16px;
+      border-radius: 8px;
+      text-align: center;
+      color: #856404;
+      font-weight: 500;
+      margin-top: 12px;
+    }
+    
+    .success {
+      background: #d4edda;
+      border-color: #28a745;
+      color: #155724;
+    }
+    
+    .note {
+      background: #e7f3ff;
+      border-left: 4px solid #2196F3;
+      padding: 12px 16px;
+      margin-top: 16px;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    
+    .emoji {
+      font-size: 24px;
+      margin-right: 8px;
+    }
+    
+    .checklist {
+      background: white;
+      padding: 16px;
+      border-radius: 8px;
+      margin-top: 12px;
+    }
+    
+    .checklist-item {
+      display: flex;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .checklist-item:last-child {
+      border-bottom: none;
+    }
+    
+    .checklist-item input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      margin-right: 12px;
+      cursor: pointer;
+    }
+    
+    .code {
+      background: #f4f4f4;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🧪 Test New Features</h1>
+    <p class="subtitle">Version 1.1.0 - Copy & Delete Confirmation</p>
+    
+    <!-- Feature 1: Copy to Clipboard -->
+    <div class="feature-section">
+      <h2><span class="emoji">📋</span>Feature 1: Copy to Clipboard</h2>
+      <p>Each saved field now has a copy button to quickly copy values to your clipboard.</p>
+      
+      <ul class="test-steps">
+        <li>Open the extension popup (click the extension icon)</li>
+        <li>Add a test field:
+          <ul style="margin-top: 8px; margin-left: 20px;">
+            <li>Label: <span class="code">email</span></li>
+            <li>Value: <span class="code">test@example.com</span></li>
+          </ul>
+        </li>
+        <li>Look for the <span class="code">📋</span> (clipboard) button next to the delete button</li>
+        <li>Click the <span class="code">📋</span> button</li>
+        <li>The button should briefly turn green with a <span class="code">✓</span> checkmark</li>
+        <li>Come back to this page and paste in the field below (Ctrl+V or Cmd+V)</li>
+      </ul>
+      
+      <div class="test-area">
+        <div class="form-group">
+          <label>Paste the copied value here:</label>
+          <input type="text" id="paste-test" placeholder="Press Ctrl+V (or Cmd+V) to paste">
+        </div>
+        <div class="paste-here" id="paste-result">
+          👆 Click above and paste (Ctrl+V)
+        </div>
+      </div>
+      
+      <div class="note">
+        <strong>💡 Tip:</strong> Try copying different fields to test multiple values!
+      </div>
+    </div>
+    
+    <!-- Feature 2: Delete Confirmation -->
+    <div class="feature-section">
+      <h2><span class="emoji">⚠️</span>Feature 2: Delete Confirmation</h2>
+      <p>Deleting a field now requires confirmation to prevent accidental deletions.</p>
+      
+      <ul class="test-steps">
+        <li>Open the extension popup</li>
+        <li>Make sure you have at least one saved field</li>
+        <li>Click the <span class="code">×</span> (delete) button on any field</li>
+        <li>A confirmation dialog should appear showing:
+          <ul style="margin-top: 8px; margin-left: 20px;">
+            <li>"Delete this field?"</li>
+            <li>The label and value being deleted</li>
+            <li>"This action cannot be undone."</li>
+          </ul>
+        </li>
+        <li>Click <span class="code">Cancel</span> - the field should NOT be deleted</li>
+        <li>Click the <span class="code">×</span> button again</li>
+        <li>This time click <span class="code">OK</span> - the field should be deleted</li>
+      </ul>
+      
+      <div class="checklist">
+        <h3 style="margin-bottom: 12px;">Test Checklist:</h3>
+        <div class="checklist-item">
+          <input type="checkbox" id="check1">
+          <label for="check1">Delete button shows confirmation dialog</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="check2">
+          <label for="check2">Clicking "Cancel" prevents deletion</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="check3">
+          <label for="check3">Clicking "OK" deletes the field</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="check4">
+          <label for="check4">Success message appears after deletion</label>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Test Form for Auto-Fill -->
+    <div class="feature-section">
+      <h2><span class="emoji">📝</span>Bonus: Test Form Auto-Fill</h2>
+      <p>While you're here, test the main form-filling feature with these fields:</p>
+      
+      <div class="test-area">
+        <form>
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email">
+          </div>
+          
+          <div class="form-group">
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" placeholder="Enter your name">
+          </div>
+          
+          <div class="form-group">
+            <label for="phone">Phone:</label>
+            <input type="tel" id="phone" name="phone" placeholder="Enter your phone">
+          </div>
+          
+          <div class="form-group">
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" placeholder="Enter your address">
+          </div>
+          
+          <div class="form-group">
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" placeholder="Enter a message"></textarea>
+          </div>
+        </form>
+        
+        <div class="note">
+          <strong>📌 How to test:</strong>
+          <ol style="margin-top: 8px; margin-left: 20px;">
+            <li>Add matching label/value pairs in the extension (email, name, phone, etc.)</li>
+            <li>Click "Fill Form on This Page" in the extension popup</li>
+            <li>Watch the fields above fill automatically!</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Summary -->
+    <div class="feature-section">
+      <h2><span class="emoji">✅</span>What's New in v1.1.0</h2>
+      <ul style="margin-left: 20px; line-height: 1.8;">
+        <li><strong>Copy Button:</strong> 📋 icon appears next to each saved field</li>
+        <li><strong>Visual Feedback:</strong> Button turns green (✓) on successful copy</li>
+        <li><strong>Delete Confirmation:</strong> Prevents accidental deletions</li>
+        <li><strong>Browser Fallback:</strong> Works on older browsers too</li>
+        <li><strong>Better UX:</strong> Safer and more convenient data management</li>
+      </ul>
+      
+      <div class="note" style="margin-top: 16px;">
+        <strong>🎉 Congratulations!</strong> If all tests passed, your extension is working perfectly with the new features!
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // Add paste detection
+    document.getElementById('paste-test').addEventListener('paste', (e) => {
+      setTimeout(() => {
+        const pastedValue = e.target.value;
+        const resultDiv = document.getElementById('paste-result');
+        if (pastedValue) {
+          resultDiv.textContent = `✓ Successfully pasted: "${pastedValue}"`;
+          resultDiv.classList.add('success');
+        }
+      }, 10);
+    });
+    
+    // Save checklist state
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(cb => {
+      const saved = localStorage.getItem(cb.id);
+      if (saved === 'true') cb.checked = true;
+      
+      cb.addEventListener('change', () => {
+        localStorage.setItem(cb.id, cb.checked);
+      });
+    });
+  </script>
+</body>
+</html>
+
