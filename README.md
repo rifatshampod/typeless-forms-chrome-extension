@@ -12,6 +12,7 @@ A powerful Chrome extension that allows you to save custom label/value pairs and
 ## ✨ Features
 
 - **Save Custom Data**: Store unlimited label/value pairs (e.g., email, phone, name)
+- **Search & Filter**: Instantly search through your saved fields in real-time
 - **Copy to Clipboard**: Quickly copy any saved value with one click using the ⧉ button
 - **Delete Confirmation**: Prevent accidental deletions with confirmation dialog
 - **Smart Matching**: Intelligent heuristic engine matches fields by ID, name, label, and placeholder
@@ -86,6 +87,7 @@ the last update is added in the chrome store for review. waiting for publishing.
 
 ### Managing Data
 
+- **Search**: Type in the search bar to filter fields by label or value in real-time
 - **Copy**: Click the **⧉** (copy) button to copy a value to your clipboard
 - **Update**: Add a pair with the same label to update its value
 - **Delete**: Click the **×** button to delete a pair (with confirmation dialog)

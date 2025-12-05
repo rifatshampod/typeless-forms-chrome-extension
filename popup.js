@@ -10,9 +10,13 @@ const addBtn = document.getElementById('add-btn');
 const pairsList = document.getElementById('pairs-list');
 const countBadge = document.getElementById('count-badge');
 const fillFormBtn = document.getElementById('fill-form-btn');
+const searchInput = document.getElementById('search-input');
+const clearSearchBtn = document.getElementById('clear-search');
 
 // State
 let formData = [];
+let searchQuery = '';
+let filteredData = [];
 
 /**
  * Initialize the popup
@@ -28,6 +32,7 @@ async function init() {
 async function loadAndRender() {
   try {
     formData = await loadData();
+    filteredData = formData; // Initialize filtered data
     renderPairsList();
     updateCountBadge();
   } catch (error) {
@@ -42,6 +47,10 @@ async function loadAndRender() {
 function attachEventListeners() {
   addBtn.addEventListener('click', handleAddPair);
   fillFormBtn.addEventListener('click', handleFillForm);
+  
+  // Search functionality
+  searchInput.addEventListener('input', handleSearchInput);
+  clearSearchBtn.addEventListener('click', handleClearSearch);
   
   // Allow Enter key to add pair
   labelInput.addEventListener('keypress', (e) => {
@@ -100,8 +109,7 @@ async function handleAddPair() {
   // Save and render
   try {
     await saveData(formData);
-    renderPairsList();
-    updateCountBadge();
+    performSearch(); // Re-apply search filter
     
     // Clear inputs
     labelInput.value = '';
@@ -136,8 +144,7 @@ async function handleDeletePair(id) {
   
   try {
     await saveData(formData);
-    renderPairsList();
-    updateCountBadge();
+    performSearch(); // Re-apply search filter
     showSuccess('Pair deleted');
   } catch (error) {
     console.error('Error deleting pair:', error);
@@ -201,6 +208,52 @@ function showCopyFeedback(button, success) {
 }
 
 /**
+ * Handle search input
+ */
+function handleSearchInput(e) {
+  const query = e.target.value;
+  searchQuery = query.toLowerCase().trim();
+  
+  // Show/hide clear button
+  if (query) {
+    clearSearchBtn.style.display = 'block';
+  } else {
+    clearSearchBtn.style.display = 'none';
+  }
+  
+  // Filter data
+  performSearch();
+}
+
+/**
+ * Handle clear search button click
+ */
+function handleClearSearch() {
+  searchInput.value = '';
+  searchQuery = '';
+  clearSearchBtn.style.display = 'none';
+  performSearch();
+  searchInput.focus();
+}
+
+/**
+ * Perform search and update UI
+ */
+function performSearch() {
+  if (!searchQuery) {
+    filteredData = formData;
+  } else {
+    filteredData = formData.filter(pair => 
+      pair.label.toLowerCase().includes(searchQuery) ||
+      pair.value.toLowerCase().includes(searchQuery)
+    );
+  }
+  
+  renderPairsList();
+  updateCountBadge();
+}
+
+/**
  * Handle filling form on current page
  */
 async function handleFillForm() {
@@ -241,12 +294,20 @@ async function handleFillForm() {
  * Render the pairs list
  */
 function renderPairsList() {
+  // Show empty state if no data at all
   if (formData.length === 0) {
     pairsList.innerHTML = '<p class="empty-state">No saved pairs yet. Add one above!</p>';
     return;
   }
   
-  pairsList.innerHTML = formData
+  // Show "no results" if search returned nothing
+  if (filteredData.length === 0) {
+    pairsList.innerHTML = `<p class="empty-state">No fields match "${escapeHtml(searchQuery)}"</p>`;
+    return;
+  }
+  
+  // Render filtered data
+  pairsList.innerHTML = filteredData
     .map(pair => createPairItemHTML(pair))
     .join('');
   
@@ -293,7 +354,13 @@ function createPairItemHTML(pair) {
  * Update the count badge
  */
 function updateCountBadge() {
-  countBadge.textContent = formData.length;
+  if (searchQuery) {
+    // Show "X of Y" when searching
+    countBadge.textContent = `${filteredData.length} of ${formData.length}`;
+  } else {
+    // Show total count when not searching
+    countBadge.textContent = formData.length;
+  }
 }
 
 /**

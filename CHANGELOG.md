@@ -1,6 +1,24 @@
 # Changelog
 
-## Version 1.1.0 (Current)
+## Version 1.2.0 (Current)
+
+### ✨ New Features
+
+#### 3. Real-Time Search & Filter
+- **Description**: Search bar to instantly filter saved fields by label or value
+- **Location**: Between "Saved Pairs" header and the list
+- **How to use**: Type in the search field to filter results in real-time
+- **Features**:
+  - Searches both labels and values
+  - Case-insensitive partial matching
+  - Clear button (×) to reset search
+  - Count badge shows "X of Y" when filtering
+  - Shows "No fields match" when no results
+- **Files Modified**: `popup.html`, `popup.css`, `popup.js`
+
+---
+
+## Version 1.1.0
 
 ### ✨ New Features
 
